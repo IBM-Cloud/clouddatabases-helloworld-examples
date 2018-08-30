@@ -39,13 +39,13 @@ clouddatabases-postgresql-helloworld-nodejs is a sample IBM Cloud application wh
 6. Create a Cloud Foundry alias for the database service.
    
    ```shell
-   ibmcloud resource service-alias alias-name --instance instance-name
+   ibmcloud resource service-alias-create alias-name --instance-name instance-name
    ```
 
    The alias name can be the same as the database service instance name. So, for our database created in step 4, we could do:
 
    ```shell
-   ibmcloud resource service-alias example-psql --instance example-psql
+   ibmcloud resource service-alias-create example-psql --instance-name example-psql
    ```
 
 7. Clone the app to your local environment from your terminal using the following command:
