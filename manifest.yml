@@ -1,8 +1,0 @@
----
-applications:
-- name:    example-helloworld-nodejs
-  routes:
-  - route: example-helloworld-nodejs.mybluemix.net
-  memory:  128M
-  services:
-    - example-psql
