@@ -4,12 +4,15 @@ $(document).ready(function() {
     $('.hidden').fadeOut();
     $('displayOutput').empty();
     $.get( '/words', function(data) {
+      console.log("showing", data);
+
+      var data = JSON.parse(data);
       var rendered = "<ul>";
-      for (var word in data) {
-        var definition = data[word];
-        rendered = rendered + "<li>The word <b>" + word + "</b> is defined as <b>" + definition + "</b></li>";
-      }
+      data.forEach(function(item) {
+        rendered = rendered + "<li>The word <b>" + item.word + "</b> is defined as <b>" + item.definition + "</b></li>";
+      });
       rendered = rendered + "</ul>";
+
       $('#displayOutput').html(rendered);
     });
     $('.hidden').fadeIn();
@@ -17,7 +20,6 @@ $(document).ready(function() {
 
   $('#add-word').submit(function(e) {
     e.preventDefault();
-
     $.ajax({
       url: '/words',
       type: 'PUT',

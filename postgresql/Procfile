@@ -1,1 +1,1 @@
-web: node server
+web: python server.py

@@ -1,6 +1,6 @@
-# clouddatabases-postgresql-helloworld-nodejs overview
+# clouddatabases-postgresql-helloworld-python overview
 
-clouddatabases-postgresql-helloworld-nodejs is a sample IBM Cloud application which shows you how to connect to an IBM Cloud Databases for PostgreSQL service to a IBM Cloud Foundry application written in Node.js.
+clouddatabases-postgresql-helloworld-python is a sample IBM Cloud application which shows you how to connect to an IBM Cloud Databases for PostgreSQL service to a IBM Cloud Foundry application written in Python 3.6.4.
 
 ## Running the app on IBM Cloud
 
@@ -20,8 +20,7 @@ clouddatabases-postgresql-helloworld-nodejs is a sample IBM Cloud application wh
 
 4. Create your database service.
 
-      The database can be created from the command line using the `ibmcloud resource service-instance-create` command. This takes a
-      service instance name, a service name, plan name and location. For example, if we wished to create a database service named "example-psql" and we wanted it to be a "databases-for-postgresql" deployment on the standard plan running in the us-south region, the command would look like this:
+      The database can be created from the command line using the `ibmcloud resource service-instance-create` command. This takes a service instance name, a service name, plan name and location. For example, if we wished to create a database service named "example-psql" and we wanted it to be a "databases-for-postgresql" deployment on the standard plan running in the us-south region, the command would look like this:
 
       ```shell
       ibmcloud resource service-instance-create example-psql databases-for-postgresql standard us-south
@@ -51,19 +50,25 @@ clouddatabases-postgresql-helloworld-nodejs is a sample IBM Cloud application wh
 7. Clone the app to your local environment from your terminal using the following command:
 
    ```shell
-   git clone https://github.com/IBM-Cloud/clouddatabases-postgresql-helloworld-nodejs.git
+   git clone https://github.com/IBM-Cloud/clouddatabases-postgresql-helloworld-python.git
    ```
 
-8. `cd` into this newly created directory. The code for connecting to the service, and reading from and updating the database can be found in `server.js`. See [Code Structure](#code-structure) and the code comments for information on the app's functions. There's also a `public` directory, which contains the html, style sheets and javascript for the web app. For now, the only file you need to update is the application manifest.
+8. `cd` into this newly created directory. The code for connecting to the service, and reading from and updating the database can be found in `server.py`. See [Code Structure](#code-structure) and the code comments for information on the app's functions. There's also `templates` and `static` directories, which contain the html, style sheets and javascript for the web app. For now, the only file you need to update is the application manifest.
 
-9. Update the `manifest.yml` file.
+9. Make sure that you store a local copy of the databases's self-signed certificate. You'll need to go into the file `server.py` and add the location of your self-signed certificate to `sslrootcerts` when connecting to the database. [Install](https://console.bluemix.net/docs/databases-cli-plugin/cloud-databases-cli.html#cloud-databases) and use the IBM Cloud Databases plugin with the IBM Cloud CLI tool to get your self-signed certificate with the following command:
+
+```shell
+ibmcloud cdb cacert <database deployment name>
+```
+
+10. Update the `manifest.yml` file.
 
    - Change the `name` value. The value you choose will be the name of the app as it appears in your IBM Cloud dashboard.
-   - Change the `route` value to something unique. This will make be the base URL of your application. It should end with `.mybluemix.net`. For example `example-helloworld-nodejs.mybluemix.net`.
+   - Change the `route` value to something unique. This will make be the base URL of your application. It should end with `.mybluemix.net`. For example `example-helloworld-python.mybluemix.net`.
 
    Update the `service` value in `manifest.yml` to match the name of your database service instance name.
 
-10. Push the app to IBM Cloud. When you push the app it will automatically be bound to the service.
+11. Push the app to IBM Cloud. When you push the app it will automatically be bound to the service.
 
   ```shell
   ibmcloud cf push
@@ -71,24 +76,24 @@ clouddatabases-postgresql-helloworld-nodejs is a sample IBM Cloud application wh
 
 Your application is now running at host you entered as the value for the `route` in `manifest.yml`.
 
-The node-postgresql-helloworld app displays the contents of an _examples_ database. To demonstrate that the app is connected to your service, add some words to the database. The words are displayed as you add them, with the most recently added words displayed first.
+The python-postgresql-helloworld app displays the contents of an _examples_ database. To demonstrate that the app is connected to your service, add some words to the database. The words are displayed as you add them, with the most recently added words displayed first.
 
 ## Code Structure
 
 | File | Description |
 | ---- | ----------- |
-|[**server.js**](server.js)|Establishes a connection to the PostgreSQL database using credentials from VCAP_ENV and handles create and read operations on the database. |
-|[**main.js**](public/javascripts/main.js)|Handles user input for a PUT command and parses the results of a GET command to output the contents of the PostgreSQL database.|
+|[**server.py**](server.py)|Establishes a connection to the PostgreSQL database using credentials from VCAP_ENV and handles create and read operations on the database. |
+|[**main.js**](static/javascripts/main.js)|Handles user input for a PUT command and parses the results of a GET command to output the contents of the PostgreSQL database.|
 
 The app uses a PUT and a GET operation:
 
 - PUT
-  - takes user input from [main.js](public/javascript/main.js)
+  - takes user input from [main.js](static/javascript/main.js)
   - uses the `client.query` method to add the user input to the words table
 
 - GET
   - uses `client.query` method to retrieve the contents of the _words_ table
-  - returns the response of the database command to [main.js](public/javascript/main.js)
+  - returns the response of the database command to [main.js](static/javascript/main.js)
 
 
 
