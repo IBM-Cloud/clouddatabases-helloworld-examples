@@ -1,0 +1,33 @@
+{
+  "name": "clouddatabases-redis-helloworld-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "IBM Corp.",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cfenv": "^1.0.3",
+    "express": "^4.14.0",
+    "redis": "^2.6.2"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBM-Cloud/clouddatabases-redis-helloworld-nodejs.git"
+  },
+  "contributors": [
+    {
+      "name": "Neil Dewhurst",
+      "email": "ndewhurs@uk.ibm.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/IBM-Cloud/clouddatabases-redis-helloworld-nodejs/issues"
+  }
+}
