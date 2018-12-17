@@ -1,0 +1,8 @@
+---
+applications:
+- name:    example-helloworld-python
+  routes:
+  - route: example-helloworld-python.mybluemix.net
+  memory:  128M
+  services:
+    - example-redis
