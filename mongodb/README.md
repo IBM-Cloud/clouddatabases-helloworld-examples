@@ -1,4 +1,4 @@
-# clouddatabases-mongofb-helloworld-nodejs overview
+# clouddatabases-mongodb-helloworld-nodejs overview
 
 clouddatabases-mongodb-helloworld-nodejs is a sample IBM Cloud application which shows you how to connect to an IBM Cloud Databases for MongoDB service to a IBM Cloud Foundry application written in Node.js.
 
