@@ -1,0 +1,29 @@
+{
+  "name": "clouddatabases-mongodb-helloworld-nodejs",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cfenv": "^1.0.3",
+    "express": "~4.x",
+    "mongodb": "^3.1"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "IBM Corp.",
+  "contributors": [
+    {
+      "name": "Abdullah Alger",
+      "email": "abdullah.alger@ibm.com"
+    }
+  ],
+  "bugs": {
+    "url": ""
+  },
+  "license": "Apache-2.0"
+}
