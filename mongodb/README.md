@@ -50,7 +50,7 @@ clouddatabases-mongodb-helloworld-nodejs is a sample IBM Cloud application which
 7. Clone the app to your local environment from your terminal using the following command:
 
    ```shell
-   git clone -b node ..
+   git clone -b node git@github.com:IBM-Cloud/clouddatabases-helloworld-cloudfoundry-examples.git
    ```
 
 8. `cd` into this newly created directory. The code for connecting to the service, and reading from and updating the database can be found in `server.js`. See [Code Structure](#code-structure) and the code comments for information on the app's functions. There's also a `public` directory, which contains the html, style sheets and javascript for the web app. For now, the only file you need to update is the application manifest.
