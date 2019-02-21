@@ -6,7 +6,7 @@ clouddatabases-mongodb-helloworld-nodejs is a sample IBM Cloud application which
 
 1. If you do not already have an IBM Cloud account, [sign up here][IBMCloud_signup_url]
 
-2. [Download and install IBM Cloud CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/download_cli.html).
+2. [Download and install IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli).
 
    The IBM Cloud CLI tool tool is what you'll use to communicate with IBM Cloud from your terminal or command line.
 
@@ -92,5 +92,5 @@ The app uses a PUT and a GET operation:
 
 
 [databases_for_mongodb_url]: https://console.bluemix.net/catalog/services/databases-for-mongodb/
-[IBMCloud_signup_url]: 
+[IBMCloud_signup_url]: https://cloud.ibm.com/registration
 
