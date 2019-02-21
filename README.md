@@ -1,1 +1,1 @@
-# clouddatabases-cloudfoundry-examples
+# clouddatabases-helloworld-cloudfoundry-examples
