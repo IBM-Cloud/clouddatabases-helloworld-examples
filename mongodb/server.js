@@ -84,7 +84,7 @@ let password = authentication.password;
 
 // Extract the MongoDB URIs
 let connectionPath = mongodbConn.hosts;
-let connectionString = `mongodb://${username}:${password}@${connectionPath[0].hostname}:${connectionPath[0].port}`//,${connectionPath[1].hostname}:${connectionPath[1].port}`;
+let connectionString = `mongodb://${username}:${password}@${connectionPath[0].hostname}:${connectionPath[0].port},${connectionPath[1].hostname}:${connectionPath[1].port}/?replicaSet=replset`;
 console.log(connectionString)
 // We want to extract the port to publish our app on
 let port = process.env.PORT || 8080;
