@@ -65,7 +65,7 @@ let mongodbServices = services["databases-for-mongodb"];
 assert(!util.isUndefined(mongodbServices), "App must be bound to databases-for-mongodb service");
 
 // We now take the first bound MongoDB service and extract it's credentials object
-let mongodbConn = mongodbServices.connection.mongodb;
+let mongodbConn = mongodbServices[0].credentials.connection.mongodb;
 
 // Read the CA certificate and assign that to the CA variable
 let ca = [Buffer.from(mongodbConn.certificate.certificate_base64, 'base64')];
