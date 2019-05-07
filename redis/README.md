@@ -50,7 +50,7 @@ clouddatabases-redis-helloworld-nodejs is a sample IBM Cloud application which s
 7. Clone the app to your local environment from your terminal using the following command:
 
    ```shell
-   git clone https://github.com/IBM-Cloud/clouddatabases-redis-helloworld-nodejs.git
+   git clone -b node git@github.com:IBM-Cloud/clouddatabases-helloworld-cloudfoundry-examples.git
    ```
 
 8. `cd` into this newly created directory. The code for connecting to the service, and reading from and updating the database can be found in `server.js`. See [Code Structure](#code-structure) and the code comments for information on the app's functions. There's also a `public` directory, which contains the html, style sheets and javascript for the web app. For now, the only file you need to update is the application manifest.
@@ -58,7 +58,7 @@ clouddatabases-redis-helloworld-nodejs is a sample IBM Cloud application which s
 9. Update the `manifest.yml` file.
 
    - Change the `name` value. The value you choose will be the name of the app as it appears in your IBM Cloud dashboard.
-   - Change the `route` value to something unique. This will make be the base URL of your application. It should end with `.mybluemix.net`. For example `example-helloworld-nodejs.mybluemix.net`.
+   - Change the `route` value to something unique. This will make be the base URL of your application. It should end with `.us-south.cf.appdomain.cloud`. For example `example-helloworld-nodejs-redis.us-south.cf.appdomain.cloud`.
 
    Update the `service` value in `manifest.yml` to match the name of your database service instance name.
 

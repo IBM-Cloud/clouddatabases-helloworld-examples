@@ -1,8 +1,8 @@
 ---
 applications:
-- name:    example-helloworld-nodejs
+- name:    example-helloworld-nodejs-postgresql
   routes:
-  - route: example-helloworld-nodejs.mybluemix.net
+  - route: example-helloworld-nodejs-postgresql.us-south.cf.appdomain.cloud
   memory:  128M
   services:
     - example-psql

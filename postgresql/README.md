@@ -51,7 +51,7 @@ clouddatabases-postgresql-helloworld-nodejs is a sample IBM Cloud application wh
 7. Clone the app to your local environment from your terminal using the following command:
 
    ```shell
-   git clone https://github.com/IBM-Cloud/clouddatabases-postgresql-helloworld-nodejs.git
+   git clone -b node git@github.com:IBM-Cloud/clouddatabases-helloworld-cloudfoundry-examples.git
    ```
 
 8. `cd` into this newly created directory. The code for connecting to the service, and reading from and updating the database can be found in `server.js`. See [Code Structure](#code-structure) and the code comments for information on the app's functions. There's also a `public` directory, which contains the html, style sheets and javascript for the web app. For now, the only file you need to update is the application manifest.
@@ -59,7 +59,7 @@ clouddatabases-postgresql-helloworld-nodejs is a sample IBM Cloud application wh
 9. Update the `manifest.yml` file.
 
    - Change the `name` value. The value you choose will be the name of the app as it appears in your IBM Cloud dashboard.
-   - Change the `route` value to something unique. This will make be the base URL of your application. It should end with `.mybluemix.net`. For example `example-helloworld-nodejs.mybluemix.net`.
+   - Change the `route` value to something unique. This will make be the base URL of your application. It should end with `.us-south.cf.appdomain.cloud`. For example `example-helloworld-nodejs-postgresql.us-south.cf.appdomain.cloud`.
 
    Update the `service` value in `manifest.yml` to match the name of your database service instance name.
 
@@ -92,6 +92,6 @@ The app uses a PUT and a GET operation:
 
 
 
-[databases_for_postgreSQL_url]: https://console.bluemix.net/catalog/services/databases-for-postgreSQL/
-[IBMCloud_signup_url]: https://console.bluemix.net/registration/?cm_mmc=Display-SampleApp-_-IBMCloudSampleApp-DatabasesForPostgreSQL
+[databases_for_postgreSQL_url]: https://cloud.ibm.com/catalog/services/databases-for-postgreSQL/
+[IBMCloud_signup_url]: https://cloud.ibm.com/registration/?cm_mmc=Display-SampleApp-_-IBMCloudSampleApp-DatabasesForPostgreSQL
 

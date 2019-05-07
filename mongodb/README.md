@@ -58,7 +58,7 @@ clouddatabases-mongodb-helloworld-nodejs is a sample IBM Cloud application which
 9. Update the `manifest.yml` file.
 
    - Change the `name` value. The value you choose will be the name of the app as it appears in your IBM Cloud dashboard.
-   - Change the `route` value to something unique. This will make be the base URL of your application. It should end with `.us-south.cf.appdomain.cloud`. For example `example-helloworld-nodejs.us-south.cf.appdomain.cloud`.
+   - Change the `route` value to something unique. This will make be the base URL of your application. It should end with `.us-south.cf.appdomain.cloud`. For example `example-helloworld-nodejs-mongodb.us-south.cf.appdomain.cloud`.
 
    Update the `service` value in `manifest.yml` to match the name of your database service instance name.
 
@@ -91,6 +91,6 @@ The app uses a PUT and a GET operation:
   - returns the response of the database command to [main.js](public/javascript/main.js)
 
 
-[databases_for_mongodb_url]: https://console.bluemix.net/catalog/services/databases-for-mongodb/
+[databases_for_mongodb_url]: https://cloud.ibm.com/catalog/services/databases-for-mongodb/
 [IBMCloud_signup_url]: https://cloud.ibm.com/registration
 
