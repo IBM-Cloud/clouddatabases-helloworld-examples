@@ -155,8 +155,8 @@ function getWords() {
               word: hit._source.word,
               definition: hit._source.definition
             });
-            resolve(words);
           });
+          resolve(words);
         });
       })
       .catch(err => {
