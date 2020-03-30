@@ -11,6 +11,9 @@
     "scripts": {
         "start": "node server.js"
     },
+    "engines": {
+      "node": "12.x"
+    },
     "repository": {
       "type": "git",
       "url": "https://github.com/IBM-Cloud/compose-postgresql-helloworld-nodejs.git"
