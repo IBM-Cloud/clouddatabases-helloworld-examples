@@ -1,33 +1,19 @@
 {
-    "name": "clouddatabases-etcd-helloworld-nodejs",
-    "version": "1.0.0",
-    "description": "IBM Cloud Databases for Etcd Node.js example",
-    "dependencies": {
-        "body-parser": "^1.17.2",
-        "cfenv": "^1.1.0",
-        "etcd3": "^0.2.11",
-        "express": "^4.15.4"
-    },
-    "main": "server.js",
-    "scripts": {
-        "start": "node server.js"
-    },
-    "engines": {
-        "node": "12.x"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/IBM-Cloud/clouddatabases-etcd-helloworld-nodejs.git"
-    },
-    "author": "IBM",
-    "contributors": [
-        {
-            "name": "Abdullah Alger",
-            "email": "abdullah.alger@ibm.com"
-        }
-    ],
-    "bugs": {
-        "url": "https://github.com/IBM-Cloud/clouddatabases-etcd-helloworld-nodejs/issues"
-    },
-    "license": "Apache-2.0"
+  "name": "clouddatabases-postgresql-helloworld-nodejs",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "etcd3": "^1.1.0",
+    "express": "^4.18.1"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "IBM Corp.",
+  "license": "Apache-2.0"
 }
