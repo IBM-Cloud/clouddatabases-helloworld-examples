@@ -1,5 +1,5 @@
 /**
- * Copyright 2016 IBM Corp. All Rights Reserved.
+ * Copyright 2022 IBM Corp. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
@@ -14,137 +14,77 @@
  * limitations under the License.
  */
 
-"use strict";
-/* jshint node:true */
-
 // Add the express web framework
 const express = require("express");
-const { URL } = require("url");
+const fs = require("fs");
 const app = express();
+const RC = require("./redisclient.js")
 
 // Use body-parser to handle the PUT data
 const bodyParser = require("body-parser");
 app.use(
-    bodyParser.urlencoded({
-        extended: false
-    })
+  bodyParser.json()
 );
 
-// Util is handy to have around, so thats why that's here.
-const util = require('util')
-
-// and so is assert
-const assert = require('assert');
 
 // We want to extract the port to publish our app on
 let port = process.env.PORT || 8080;
 
-// Then we'll pull in the database client library
-const redis = require("redis");
-
-// Now lets get cfenv and ask it to parse the environment variable
-let cfenv = require('cfenv');
-
-// load local VCAP configuration  and service credentials
-let vcapLocal;
-try {
-  vcapLocal = require('./vcap-local.json');
-  console.log("Loaded local VCAP");
-} catch (e) { 
-    // console.log(e)
-}
-
-const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {}
-const appEnv = cfenv.getAppEnv(appEnvOpts);
-
-// Within the application environment (appenv) there's a services object
-let services = appEnv.services;
-
-// The services object is a map named by service so we extract the one for Redis
-let redis_services = services["databases-for-redis"];
-
-// This check ensures there is a services for Redis databases
-assert(!util.isUndefined(redis_services), "Must be bound to databases-for-redis services");
-
-// We now take the first bound Redis service and extract it's credentials object
-let credentials = redis_services[0].credentials;
-
-let redisconn = credentials.connection.rediss;
-
-let connectionString = redisconn.composed[0];
-
-let caCert = new Buffer.from(redisconn.certificate.certificate_base64, 'base64').toString();
-
-let client = redis.createClient(connectionString, {
-        tls: { ca: caCert, servername: new URL(connectionString).hostname }
-});
- 
-
-client.on("error", function(err) {
-    console.log("Error " + err);
-});
+// This is a global variable we'll use for handing the redis client around
+let redisClient;
 
 // Add a word to the database
-function addWord(word, definition) {
-    return new Promise(function(resolve, reject) {
-        // use the connection to add the word and definition entered by the user
-        client.hset("words", word, definition, function(
-            error,
-            result
-        ) {
-            if (error) {
-                reject(error);
-            } else {
-                resolve("success");
-            }
-        });
-    });
+async function addWord(word, definition) {
+  const obj = {
+    _id: word, word, definition
+  }
+  return await redisClient.lPush("wordlist", JSON.stringify(obj))
 }
 
 // Get words from the database
-function getWords() {
-    return new Promise(function(resolve, reject) {
-        // use the connection to return us all the documents in the words hash.
-        client.hgetall("words", function(err, resp) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(resp);
-            }
-        });
-    });
+async function getWords() {
+  let resp =  await redisClient.lRange("wordlist", 0, -1)
+  resp = resp.map (function (e){
+    return JSON.parse(e)
+  })
+  console.log(resp)
+  return resp
+
 }
 
-// We can now set up our web server. First up we set it to server static pages
+// With the database going to be open as some point in the future, we can
+// now set up our web server. First up we set it to server static pages
 app.use(express.static(__dirname + "/public"));
 
-// The user has clicked submit to add a word and definition to the hash
+// The user has clicked submit to add a word and definition to the database
 // Send the data to the addWord function and send a response if successful
-app.put("/words", function(request, response) {
-    addWord(request.body.word, request.body.definition)
-        .then(function(resp) {
-            response.send(resp);
-        })
-        .catch(function(err) {
-            console.log(err);
-            response.status(500).send(err);
-        });
+app.put("/words", async function (request, response) {
+  try {
+    const resp = await addWord(request.body.word, request.body.definition)
+    response.send({insertedId:request.body.word });
+
+  } catch (err) {
+    console.log(err);
+    response.status(500).send(err);
+  }
+
 });
 
-// Read from the hash when the page is loaded or after a word is successfully added
-// Use the getWords function to get a list of words and definitions from the hash
-app.get("/words", function(request, response) {
-    getWords()
-        .then(function(words) {
-            response.send(words);
-        })
-        .catch(function(err) {
-            console.log(err);
-            response.status(500).send(err);
-        });
+// Read from the database when the page is loaded or after a word is successfully added
+// Use the getWords function to get a list of words and definitions from the database
+app.get("/words", async function (request, response) {
+  try {
+    const words = await getWords()
+    response.send(words);
+  } catch (err) {
+    console.log(err);
+    response.status(500).send(err);
+  }
 });
 
 // Listen for a connection.
-app.listen(port, function() {
-    console.log("Server is listening on port " + port);
+app.listen(port, async function () {
+  //make the mongo connection
+  redisClient = await RC()
+  console.log("Server is listening on port " + port);
 });
