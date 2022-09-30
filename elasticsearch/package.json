@@ -1,35 +1,19 @@
 {
-  "name": "compose-elasticsearch-helloworld-nodejs",
-  "version": "0.0.1",
+  "name": "clouddatabases-elasticsearch-helloworld-nodejs",
+  "version": "1.0.0",
   "dependencies": {
-    "@elastic/elasticsearch": "^6.7.0-rc.2",
-    "body-parser": "^1.15.2",
-    "cfenv": "^1.2.x",
-    "elasticsearch": "*",
-    "express": "^4.16.x",
-    "http-post": "^0.1.1",
-    "http-proxy": "^1.8.1"
+    "@elastic/elasticsearch": "7.10",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1"
   },
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "engines": {
-    "node": "12.x"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IBM-Cloud/compose-elasticsearch-helloworld-nodejs.git"
+    "url": ""
   },
   "author": "IBM Corp.",
-  "contributors": [
-    {
-      "name": "Neil Dewhurst",
-      "email": "ndewhurs@uk.ibm.com"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/IBM-Cloud/compose-elasticsearch-helloworld-nodejs/issues"
-  },
   "license": "Apache-2.0"
 }
