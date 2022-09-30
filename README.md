@@ -21,7 +21,7 @@ Follow the steps in [this document](https://cloud.ibm.com/docs/account?topic=acc
 git clone https://github.com/IBM-Cloud/clouddatabases-helloworld-examples.git
 ```
 
-### Install the infrastructure
+### Step 3: Install the infrastructure
 
 Go into the `terraform` folder in the <directory> of the database example you want to run (e.g. mysql).
 
@@ -47,7 +47,7 @@ The Terraform script will output some configuration data that will be needed to 
 terraform output -json >../config.json
 ```
 
-### Run the app locally
+### Step 4: Run the app locally
 
 The easiest first step is to run the application that will connect to the database from your local machine. To do this make sure you are in the <folder> of the database you want to run (e.g. mysql), then install the node dependencies and run the service:
 
@@ -64,13 +64,18 @@ You should see a welcome page with a database logo, e.g.
 
 <img src="assets/image.png" alt="homepage" width="500"/>
 
+
+
 You can then enter a word and its definition. The data pair will get added to the database and will appear in a list at the bottom of the page:
+
 
 <img src="assets/list.png" alt="list" width="500"/>
 
-### Run the app from a Docker container
+<br>
 
-You can also put the app code inside a Docker container and run it from there. This would be a first step towards hosting your application from a service like [Code Engine]().
+### Step 5 (Optional): Run the app from a Docker container
+
+You can also put the app code inside a Docker container and run it from there. This would be a first step towards hosting your application from a service like [Code Engine](https://www.ibm.com/cloud/code-engine).
 
 Make sure you are logged into your Docker account. In the <directory> of the database example you are using type:
 
