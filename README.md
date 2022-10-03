@@ -1,6 +1,12 @@
 # IBM Cloud Databases and Messages Node Examples
 
-A set of example NodeJS applications that will add word/definition pairs to a database or message queue running on IBM Cloud.
+This repo contains a simple example of how to set up an IBM Cloud Database and connect it to a web front end. 
+
+You will install the database infrastructure using [Terraform](https://www.terraform.io) and your web application will use the popular [express](https://expressjs.com/) framework.
+
+You will be able to run the application locally or using Docker.
+
+Your application will be a simple one page website that collects word/definition pairs and adds them to the database or message queue running on IBM Cloud.
 
 ## Running the examples
 
