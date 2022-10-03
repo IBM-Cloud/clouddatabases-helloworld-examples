@@ -1,0 +1,92 @@
+<html>
+
+<head>
+  <title>Hello World - PostgreSQL</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+      <v-main>
+        <v-container>
+          <v-alert>
+            Thank you for creating an instance of <a href="https://cloud.ibm.com/databases/databases-for-postgresql/create">IBM
+              Cloud Databases for PostgreSQL</a>.
+            Please insert A word in the database!
+          </v-alert>
+          <v-row>
+            <v-col cols="3">
+              <v-img src="images/postgresql.svg"></v-img>
+            </v-col>
+            <v-col cols="9">
+              <v-form>
+                <v-text-field v-model="word" label="Enter a Word"></v-text-field>
+                <v-text-field v-model="definition" label="Enter Definition"></v-text-field>
+
+                <v-btn @click="addWord">Submit</v-btn>
+              </v-form>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="3"></v-col>
+            <v-col cols="9">
+              <v-list>
+                <v-list-item v-for="word in words" :key="word._id">
+                  The word {{ word.word }} is defined as: {{word.definition}}
+                </v-list-item>
+              </v-list>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        word: "",
+        definition: "",
+        words: []
+      },
+      mounted: async function () {
+        const url = window.location.origin + "/words"
+        const requestOptions = {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        };
+        const response = await fetch(url, requestOptions)
+        this.words = await response.json()
+      },
+      methods: {
+        addWord: async function () {
+          const obj = {
+            word: this.word,
+            definition: this.definition
+          }
+          const url = window.location.origin + "/words"
+          const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(obj)
+          };
+          const response = await fetch(url, requestOptions)
+          const resjson = await response.json()
+          console.log(resjson)
+          obj._id = resjson.insertedId
+          this.words.push(obj)
+          this.word = ""
+          this.definition = ""
+
+        }
+      }
+    })
+  </script>
+</body

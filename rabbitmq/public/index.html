@@ -1,0 +1,89 @@
+<html>
+
+<head>
+  <title>Hello World - etcd</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+      <v-main>
+        <v-container>
+          <v-alert>
+            Thank you for creating an instance of <a href="https://cloud.ibm.com/databases/messages-for-rabbitmq/create">IBM
+              Cloud Messages for RabbitMQ</a>.
+            Please add a message to the queue! You can add multiple messages and retrieve them below in First-In-First-Out order
+          </v-alert>
+          <v-alert v-model="show_alert" dismissible type="success" > Your message has been added to the queue! </v-alert>
+          <v-row>
+            <v-col cols="3">
+              <v-img src="images/rabbitmq.svg"></v-img>
+            </v-col>
+            <v-col cols="9">
+              <v-form>
+                <v-text-field v-model="message" label="Enter a Message"></v-text-field>
+                <v-btn @click="addMessage">Submit</v-btn>
+              </v-form>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="3"></v-col>
+            <v-col cols="9">
+              <v-btn @click="getMessage">Retrieve Message</v-btn>
+              <div>
+                {{ retrievedMessage.message }}
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        message:"",
+        show_alert: false,
+        retrievedMessage: {}
+      },
+      methods: {
+        addMessage: async function () {
+          const obj = {
+            message: this.message
+          }
+          const url = window.location.origin + "/words"
+          const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(obj)
+          };
+          await fetch(url, requestOptions)
+          this.show_alert = true
+          this.message= ""
+          const self=this
+          setTimeout(function () {
+            self.show_alert = false
+          }, 4000)
+        },
+        getMessage: async function () {
+          const url = window.location.origin + "/words"
+        const requestOptions = {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        };
+        const response = await fetch(url, requestOptions)
+        this.retrievedMessage = await response.json()
+        }
+
+      }
+    })
+  </script>
+</body
