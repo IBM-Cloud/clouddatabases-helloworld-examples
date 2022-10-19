@@ -80,7 +80,7 @@ If successful, the output shows you are connected:
 
 The first step toward hosting your application from a service like [Code Engine](https://www.ibm.com/cloud/code-engine) is to containerize the app code inside a Docker container and run it from there.
 
-1. Make sure you are logged into your Docker account. In the <directory> of the database example you are using enter the following command:
+1. Make sure you are logged in to your Docker account. In the service folder of your chosen database, enter the following command:
 
 ```
 docker build -t database-hello-world:1.0 . 
