@@ -32,7 +32,7 @@ git clone https://github.com/IBM-Cloud/clouddatabases-helloworld-examples.git
 ### Step 3: Install the infrastructure
 
 In this step, you deploy an instance of the database service you want to use. The GitHub repository contains folders for various Cloud Databases resources.
-1. From the main GitHub project folder, navigate into the service folder of your choice, for example, mysql.
+1. From the main GitHub project folder, navigate into the `terraform` service folder of your choice, for example, `mysql/terraform`.
 2. On your machine, create a document that is named `terraform.tfvars`, with the following fields:
 ```
 ibmcloud_api_key = "<your_api_key_from_step_1>"
