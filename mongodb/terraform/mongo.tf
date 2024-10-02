@@ -3,6 +3,7 @@ resource "ibm_database" "mongodb" {
   name              = "mongodb-hello-world"
   service           = "databases-for-mongodb"
   plan              = "standard"
+  service_endpoints = "public"
   location          = var.region
   version           = "4.4"
   adminpassword = var.admin_password

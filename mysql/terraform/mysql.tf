@@ -3,7 +3,8 @@ resource "ibm_database" "mysqldb" {
   name              = "mysql-hello-world"
   service           = "databases-for-mysql"
   plan              = "standard"
-  version = "8.0"
+  service_endpoints = "public"
+  version           = "8.0"
   location          = var.region
   adminpassword = var.admin_password
 

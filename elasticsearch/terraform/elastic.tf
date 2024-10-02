@@ -4,6 +4,7 @@ resource "ibm_database" "elasticdb" {
   service           = "databases-for-elasticsearch"
   plan              = "standard"
   version           = "7.10"
+  service_endpoints = "public"
   location          = var.region
   adminpassword = var.admin_password
 
