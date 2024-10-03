@@ -4,6 +4,7 @@ resource "ibm_database" "redisdb" {
   service                              = "databases-for-redis"
   plan                                 = "standard"
   location                             = "eu-gb"
+  service_endpoints                    = "public"
   tags                                 = []
   adminpassword = var.admin_password
 }

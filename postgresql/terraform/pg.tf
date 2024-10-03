@@ -3,6 +3,7 @@ resource "ibm_database" "postgresdb" {
   name              = "pg-hello-world"
   service           = "databases-for-postgresql"
   plan              = "standard"
+  service_endpoints = "public"
   location          = var.region
   adminpassword = var.admin_password
 

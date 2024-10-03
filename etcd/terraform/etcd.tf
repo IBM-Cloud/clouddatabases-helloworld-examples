@@ -3,6 +3,7 @@ resource "ibm_database" "etcddb" {
   name              = "etcd-hello-world"
   service           = "databases-for-etcd"
   plan              = "standard"
+  service_endpoints = "public"
   location          = var.region
   adminpassword     = var.admin_password
 

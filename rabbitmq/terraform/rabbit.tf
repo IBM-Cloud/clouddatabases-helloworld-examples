@@ -3,6 +3,7 @@ resource "ibm_database" "rabbitmq" {
   name              = "rabbit-hello-world"
   service           = "messages-for-rabbitmq"
   plan              = "standard"
+  service_endpoints = "public"
   location          = var.region
   adminpassword     = var.admin_password
 
