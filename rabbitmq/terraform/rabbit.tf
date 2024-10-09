@@ -15,15 +15,20 @@ resource "ibm_database" "rabbitmq" {
   }
 }
 
+data "ibm_database_connection" "icd_conn" {
+  deployment_id = ibm_database.rabbitmq.id
+  user_type     = "database"
+  user_id       = "admin"
+  endpoint_type = "public"
+}
 output "url" {
-  value = ibm_database.rabbitmq.connectionstrings[0].composed
+  value = data.ibm_database_connection.icd_conn.amqps[0].composed[0]
+}
+
+output "cert" {
+  value = data.ibm_database_connection.icd_conn.amqps[0].certificate[0].certificate_base64
 }
 
 output "password" {
   value = var.admin_password
-}
-
-
-output "cert" {
-  value = ibm_database.rabbitmq.connectionstrings[0].certbase64
 }

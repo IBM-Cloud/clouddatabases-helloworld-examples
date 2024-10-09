@@ -5,7 +5,6 @@ resource "ibm_database" "mongodb" {
   plan              = "standard"
   service_endpoints = "public"
   location          = var.region
-  version           = "4.4"
   adminpassword = var.admin_password
 
  
@@ -16,14 +15,21 @@ resource "ibm_database" "mongodb" {
   }
 }
 
+data "ibm_database_connection" "icd_conn" {
+  deployment_id = ibm_database.mongodb.id
+  user_type     = "database"
+  user_id       = "admin"
+  endpoint_type = "public"
+}
+
 output "url" {
-  value = ibm_database.mongodb.connectionstrings[0].composed
+  value = data.ibm_database_connection.icd_conn.mongodb[0].composed[0]
+}
+
+output "cert" {
+  value = data.ibm_database_connection.icd_conn.mongodb[0].certificate[0].certificate_base64
 }
 
 output "password" {
   value = var.admin_password
-}
-
-output "cert" {
-  value = ibm_database.mongodb.connectionstrings[0].certbase64
 }

@@ -23,6 +23,8 @@ module.exports = async function () {
     }
   }
 
+console.log("opts is ", opts)
+
  const client =  await mysql.createConnection(opts);
 
  console.log("Connected!")

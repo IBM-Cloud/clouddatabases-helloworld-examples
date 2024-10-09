@@ -4,7 +4,6 @@ resource "ibm_database" "mysqldb" {
   service           = "databases-for-mysql"
   plan              = "standard"
   service_endpoints = "public"
-  version           = "8.0"
   location          = var.region
   adminpassword = var.admin_password
 
@@ -16,26 +15,33 @@ resource "ibm_database" "mysqldb" {
   }
 }
 
+data "ibm_database_connection" "icd_conn" {
+  deployment_id = ibm_database.mysqldb.id
+  user_type     = "database"
+  user_id       = "admin"
+  endpoint_type = "public"
+}
+
 output "url" {
-  value = ibm_database.mysqldb.connectionstrings[0].composed
+  value = data.ibm_database_connection.icd_conn.mysql[0].composed[0]
+}
+
+output "cert" {
+  value = data.ibm_database_connection.icd_conn.mysql[0].certificate[0].certificate_base64
 }
 
 output "password" {
   value = var.admin_password
 }
 
-output "cert" {
-  value = ibm_database.mysqldb.connectionstrings[0].certbase64
-}
-
 output "host" {
-  value = ibm_database.mysqldb.connectionstrings[0].hosts[0].hostname
+  value = data.ibm_database_connection.icd_conn.mysql[0].hosts[0].hostname
 }
 
 output "port" {
-  value = ibm_database.mysqldb.connectionstrings[0].hosts[0].port  
+  value = data.ibm_database_connection.icd_conn.mysql[0].hosts[0].port  
 }
 
 output "user" {
-  value = ibm_database.mysqldb.connectionstrings[0].name  
+  value = data.ibm_database_connection.icd_conn.mysql[0].authentication[0].username
 }

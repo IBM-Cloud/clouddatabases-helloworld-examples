@@ -15,14 +15,21 @@ resource "ibm_database" "postgresdb" {
   }
 }
 
+data "ibm_database_connection" "icd_conn" {
+  deployment_id = ibm_database.postgresdb.id
+  user_type     = "database"
+  user_id       = "admin"
+  endpoint_type = "public"
+}
+
 output "url" {
-  value = ibm_database.postgresdb.connectionstrings[0].composed
+  value = data.ibm_database_connection.icd_conn.postgres[0].composed[0]
+}
+
+output "cert" {
+  value = data.ibm_database_connection.icd_conn.postgres[0].certificate[0].certificate_base64
 }
 
 output "password" {
   value = var.admin_password
-}
-
-output "cert" {
-  value = ibm_database.postgresdb.connectionstrings[0].certbase64
 }

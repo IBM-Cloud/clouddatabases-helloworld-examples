@@ -85,7 +85,8 @@ app.get("/words", async function (request, response) {
 
 // Listen for a connection.
 app.listen(port, async function () {
-  //make the mongo connection
+  //make the mysql connection
+  console.log("Making connection..")
   mysqldb = await PC()
   console.log("Server is listening on port " + port);
 });

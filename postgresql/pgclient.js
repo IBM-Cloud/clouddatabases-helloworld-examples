@@ -19,7 +19,7 @@ module.exports = async function () {
 
   await client.connect()
 
-  console.log("Connected!")
+  //console.log("Connected!")
 
   //Now create a table for the words
 
@@ -27,7 +27,7 @@ module.exports = async function () {
 
   await client.query(query)
   
-  console.log("table created")
+  //console.log("table created")
 
   return client
 }

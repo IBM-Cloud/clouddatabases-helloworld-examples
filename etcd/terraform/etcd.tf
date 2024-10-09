@@ -15,26 +15,33 @@ resource "ibm_database" "etcddb" {
   }
 }
 
-output "url" {
-  value = ibm_database.etcddb.connectionstrings[0].composed
+data "ibm_database_connection" "icd_conn" {
+  deployment_id = ibm_database.etcddb.id
+  user_type     = "database"
+  user_id       = "admin"
+  endpoint_type = "public"
 }
 
-output "password" {
-  value = var.admin_password
+output "url" {
+  value = data.ibm_database_connection.icd_conn.grpc[0].composed[0]
 }
 
 output "cert" {
-  value = ibm_database.etcddb.connectionstrings[0].certbase64
+  value = data.ibm_database_connection.icd_conn.grpc[0].certificate[0].certificate_base64
+}
+
+output "password" {
+  value = data.ibm_database_connection.icd_conn.grpc[0].authentication[0].password
 }
 
 output "host" {
-  value = ibm_database.etcddb.connectionstrings[0].hosts[0].hostname
+  value = data.ibm_database_connection.icd_conn.grpc[0].hosts[0].hostname
 }
 
 output "port" {
-  value = ibm_database.etcddb.connectionstrings[0].hosts[0].port  
+  value = data.ibm_database_connection.icd_conn.grpc[0].hosts[0].port  
 }
 
 output "user" {
-  value = ibm_database.etcddb.connectionstrings[0].name  
+  value = data.ibm_database_connection.icd_conn.grpc[0].authentication[0].username  
 }
