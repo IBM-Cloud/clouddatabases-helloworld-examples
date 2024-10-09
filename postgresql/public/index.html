@@ -79,7 +79,7 @@
           };
           const response = await fetch(url, requestOptions)
           const resjson = await response.json()
-          console.log(resjson)
+          //console.log(resjson)
           obj._id = resjson.insertedId
           this.words.push(obj)
           this.word = ""

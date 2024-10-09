@@ -5,7 +5,7 @@ const password = config.password.value
 //note that the replace function in the uri below makes the connection insecure.. this is ok for testing but not for production!
 const uri = config.url.value.replace('$PASSWORD', password).replace(/\?sslmode.+$/,'')
 const cert = Buffer.from(config.cert.value, "base64").toString()
-console.log(uri)
+//console.log(uri)
 
 module.exports = async function () {
 

@@ -65,7 +65,7 @@ app.use(express.static(__dirname + "/public"));
 // Send the data to the addWord function and send a response if successful
 app.put("/words", async function (request, response) {
   try {
-    console.log()
+    //console.log()
     const resp = await addWord(request.body.word, request.body.definition)
     response.send(resp);
 

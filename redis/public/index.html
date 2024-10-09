@@ -64,7 +64,7 @@
         };
         const response = await fetch(url, requestOptions)
         this.words = await response.json()
-        console.log(this.words)
+        //console.log(this.words)
       },
       methods: {
         addWord: async function () {
@@ -80,10 +80,10 @@
           };
           const response = await fetch(url, requestOptions)
           const resjson = await response.json()
-          console.log(resjson)
+          //console.log(resjson)
           obj._id = resjson.insertedId
-          console.log(obj)
-          console.log(this.words)
+          //console.log(obj)
+          //console.log(this.words)
           this.words.push(obj)
           this.word = ""
           this.definition = ""

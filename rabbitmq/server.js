@@ -41,7 +41,7 @@ let rmq;
 async function addWord(message) {
   await rmq.publish(exchangeName, routingKey, Buffer(message));
   let msgTxt = message + " : Message sent at " + new Date();
-  console.log(" [+] %s", msgTxt);
+  //console.log(" [+] %s", msgTxt);
   return {}
 }
 
@@ -53,7 +53,7 @@ async function getWords() {
     result = msgOrFalse.content.toString() + " : Message received at " + new Date();
     await rmq.ack(msgOrFalse);
   }
-  console.log(" [-] %s", result);
+  //console.log(" [-] %s", result);
   return {ok:true, message:result};
 
 }
