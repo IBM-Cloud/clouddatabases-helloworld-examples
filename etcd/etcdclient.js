@@ -20,7 +20,7 @@ module.exports = async function () {
       rootCertificate: cert
     }
   };
-  console.log("opts is", opts)
+  //console.log("opts is", opts)
   const client = new Etcd3(opts).namespace("/ibmclouddb/words/");
   console.log("Connected!")
 

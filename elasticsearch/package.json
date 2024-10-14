@@ -2,9 +2,9 @@
   "name": "clouddatabases-elasticsearch-helloworld-nodejs",
   "version": "1.0.0",
   "dependencies": {
-    "@elastic/elasticsearch": "7.10",
-    "body-parser": "^1.20.0",
-    "express": "^4.18.1"
+    "@elastic/elasticsearch": "8.15",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1"
   },
   "main": "server.js",
   "scripts": {
