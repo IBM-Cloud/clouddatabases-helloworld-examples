@@ -30,10 +30,6 @@ output "cert" {
   value = data.ibm_database_connection.icd_conn.grpc[0].certificate[0].certificate_base64
 }
 
-output "password" {
-  value = data.ibm_database_connection.icd_conn.grpc[0].authentication[0].password
-}
-
 output "host" {
   value = data.ibm_database_connection.icd_conn.grpc[0].hosts[0].hostname
 }
@@ -42,6 +38,3 @@ output "port" {
   value = data.ibm_database_connection.icd_conn.grpc[0].hosts[0].port  
 }
 
-output "user" {
-  value = data.ibm_database_connection.icd_conn.grpc[0].authentication[0].username  
-}
